@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Assistant for Local Artisans</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Landing Page -->
+    <div id="landingPage" class="page">
+        <div class="container">
+            <header class="hero-section">
+                <div class="hero-content">
+                    <div class="logo">
+                        <i class="fas fa-palette"></i>
+                        <span>CraftAI</span>
+                    </div>
+                    <h1 class="hero-title">AI Assistant for Local Artisans</h1>
+                    <p class="hero-subtitle">Empowering artisans to tell their stories and price their crafts with AI</p>
+                    
+                    <div class="features-preview">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-microphone"></i>
+                            </div>
+                            <h3>Voice Description Generator</h3>
+                            <p>Speak about your craft and get AI-generated descriptions in multiple languages</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-calculator"></i>
+                            </div>
+                            <h3>Smart Pricing Assistant</h3>
+                            <p>Get fair pricing suggestions based on materials, time, and market standards</p>
+                        </div>
+                    </div>
+                    
+                    <button id="gotoDashboard" class="btn btn--primary btn--lg">
+                        <i class="fas fa-arrow-right"></i>
+                        Go to Dashboard
+                    </button>
+                </div>
+            </header>
+        </div>
+    </div>
+
+    <!-- Dashboard Page -->
+    <div id="dashboardPage" class="page hidden">
+        <div class="container">
+            <header class="dashboard-header">
+                <button id="goBack" class="btn btn--outline">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Home
+                </button>
+                <h2>Artisan Dashboard</h2>
+            </header>
+
+            <div class="dashboard-content">
+                <!-- Voice Description Generator Section -->
+                <section class="feature-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-microphone"></i> Voice Description Generator</h3>
+                        <p>Speak about your craft and get professional descriptions</p>
+                    </div>
+                    
+                    <div class="voice-interface">
+                        <div class="voice-controls">
+                            <button id="micButton" class="mic-button">
+                                <i class="fas fa-microphone"></i>
+                                <span class="mic-text">Click to Speak</span>
+                            </button>
+                            <div id="listeningIndicator" class="listening-indicator hidden">
+                                <div class="pulse"></div>
+                                <span>Listening...</span>
+                            </div>
+                        </div>
+                        
+                        <div id="speechResults" class="speech-results hidden">
+                            <div class="result-section">
+                                <h4><i class="fas fa-comment"></i> What you said:</h4>
+                                <div id="rawText" class="raw-text"></div>
+                            </div>
+                            
+                            <div id="aiDescriptions" class="ai-descriptions hidden">
+                                <div class="description-card">
+                                    <h4><i class="fas fa-globe"></i> English Description:</h4>
+                                    <div id="englishDesc" class="description-text"></div>
+                                </div>
+                                
+                                <div class="description-card">
+                                    <h4><i class="fas fa-language"></i> Local Language:</h4>
+                                    <div id="localDesc" class="description-text"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Pricing Assistant Section -->
+                <section class="feature-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-calculator"></i> AI Pricing Assistant</h3>
+                        <p>Get smart pricing suggestions for your crafts</p>
+                    </div>
+                    
+                    <div class="pricing-interface">
+                        <div class="pricing-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="craftType" class="form-label">Craft Type</label>
+                                    <select id="craftType" class="form-control">
+                                        <option value="">Select craft type</option>
+                                        <option value="Wooden Craft">Wooden Craft</option>
+                                        <option value="Pottery & Ceramics">Pottery & Ceramics</option>
+                                        <option value="Textiles & Fabrics">Textiles & Fabrics</option>
+                                        <option value="Metal Work">Metal Work</option>
+                                        <option value="Paintings">Paintings</option>
+                                        <option value="Jewelry">Jewelry</option>
+                                        <option value="Stone Carving">Stone Carving</option>
+                                        <option value="Leather Craft">Leather Craft</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="materialCost" class="form-label">Raw Material Cost (₹)</label>
+                                    <input type="number" id="materialCost" class="form-control" placeholder="500" min="0">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="hoursWorked" class="form-label">Hours Worked</label>
+                                    <input type="number" id="hoursWorked" class="form-control" placeholder="5" min="0" step="0.5">
+                                </div>
+                            </div>
+                            
+                            <button id="calculatePrice" class="btn btn--primary">
+                                <i class="fas fa-magic"></i>
+                                Calculate Smart Pricing
+                            </button>
+                        </div>
+                        
+                        <div id="pricingResults" class="pricing-results hidden">
+                            <div class="pricing-card">
+                                <h4><i class="fas fa-chart-line"></i> Pricing Breakdown</h4>
+                                <div class="breakdown-item">
+                                    <span class="breakdown-label">Material Cost:</span>
+                                    <span id="materialCostResult" class="breakdown-value">₹0</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span class="breakdown-label">Labor Value:</span>
+                                    <span id="laborCostResult" class="breakdown-value">₹0</span>
+                                </div>
+                                <div class="breakdown-item">
+                                    <span class="breakdown-label">Fair Margin:</span>
+                                    <span id="marginResult" class="breakdown-value">₹0</span>
+                                </div>
+                                <div class="breakdown-item total">
+                                    <span class="breakdown-label">Suggested Price:</span>
+                                    <span id="suggestedPrice" class="breakdown-value">₹0</span>
+                                </div>
+                                <div class="breakdown-item discount">
+                                    <span class="breakdown-label">Discount Price:</span>
+                                    <span id="discountPrice" class="breakdown-value">₹0</span>
+                                    <span id="discountPercent" class="discount-percent">(20% off)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
